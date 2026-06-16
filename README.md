@@ -1,2 +1,122 @@
 # monokai-charcoal.nvim
-Monokai high contrast theme inspired by Monokai-Charcoal for VSCode
+
+A Neovim port of the [Monokai Charcoal (high contrast)](https://github.com/74th/vscode-monokaicharcoal)
+VSCode theme: classic Monokai syntax over a true-black background with a cyan
+"charcoal" frame. Written in Lua, with Treesitter, LSP semantic tokens,
+diagnostics, terminal colors, and the common plugin ecosystem covered.
+
+The palette is lifted 1:1 from the original VSCode theme, including its signature
+choices: **orange comments**, pink keywords, green functions, cyan types, purple
+constants, and yellow strings.
+
+## Requirements
+
+- Neovim >= 0.8 (uses `vim.api.nvim_set_hl`)
+- `termguicolors` enabled (the theme sets it automatically)
+
+## Install
+
+### lazy.nvim
+
+```lua
+{
+  "ccimponeriu1996/monokai-charcoal.nvim",
+  lazy = false,
+  priority = 1000,
+  config = function()
+    require("monokai-charcoal").setup({})
+    vim.cmd.colorscheme("monokai-charcoal")
+  end,
+}
+```
+
+### packer.nvim
+
+```lua
+use({
+  "ccimponeriu1996/monokai-charcoal.nvim",
+  config = function()
+    vim.cmd.colorscheme("monokai-charcoal")
+  end,
+})
+```
+
+### vim-plug
+
+```vim
+Plug 'ccimponeriu1996/monokai-charcoal.nvim'
+" then, after plug#end():
+colorscheme monokai-charcoal
+```
+
+Calling `setup()` is optional. Without it you can just
+`:colorscheme monokai-charcoal`.
+
+## Configuration
+
+`setup()` is only needed to change defaults. Shown below with the defaults:
+
+```lua
+require("monokai-charcoal").setup({
+  transparent = false,    -- use the terminal background instead of true black
+  dim_inactive = false,   -- dim unfocused windows
+  styles = {
+    comments  = { italic = false }, -- comments are orange + upright (faithful)
+    keywords  = { bold = true },
+    functions = {},
+    types     = { italic = true },
+    variables = {},
+    booleans  = {},
+    strings   = {},
+  },
+  -- tweak the palette before highlights are built
+  on_colors = function(colors)
+    -- colors.bg = "#0a0a0a"
+  end,
+  -- override or add highlight groups (table or function(colors) -> table)
+  on_highlights = function(colors)
+    return {
+      -- Comment = { fg = colors.grey },
+    }
+  end,
+})
+vim.cmd.colorscheme("monokai-charcoal")
+```
+
+### lualine
+
+A matching lualine theme ships with the plugin:
+
+```lua
+require("lualine").setup({ options = { theme = "monokai-charcoal" } })
+```
+
+### Accessing the palette
+
+```lua
+local colors = require("monokai-charcoal").palette()
+-- colors.pink, colors.accent, colors.bg, ...
+```
+
+## Palette
+
+| Role                | Color     |
+| ------------------- | --------- |
+| Background          | `#000000` |
+| Foreground          | `#ffffff` |
+| Frame accent        | `#43b9d8` |
+| Comments / params   | `#fd971f` |
+| Strings             | `#e6db74` |
+| Numbers / constants | `#ae81ff` |
+| Keywords / tags     | `#f92672` |
+| Types / builtins    | `#66d9ef` |
+| Functions / classes | `#a6e22e` |
+
+## Credits
+
+- Original VSCode theme: [74th/vscode-monokaicharcoal](https://github.com/74th/vscode-monokaicharcoal)
+- Monokai color scheme by Wimer Hazenberg
+
+## License
+
+MIT
