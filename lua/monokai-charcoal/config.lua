@@ -27,7 +27,16 @@ M.options = vim.deepcopy(M.defaults)
 
 ---@param opts? MonokaiCharcoalConfig
 function M.setup(opts)
-  M.options = vim.tbl_deep_extend("force", vim.deepcopy(M.defaults), opts or {})
+  opts = opts or {}
+  local merged = vim.tbl_deep_extend("force", vim.deepcopy(M.defaults), opts)
+  -- Each `styles` entry should fully replace its default (so `{}` clears a
+  -- style) rather than deep-merge with it.
+  if opts.styles then
+    for group, style in pairs(opts.styles) do
+      merged.styles[group] = style
+    end
+  end
+  M.options = merged
 end
 
 return M

@@ -135,6 +135,17 @@ local colors = require("monokai-charcoal").palette()
 | Types / builtins    | `#66d9ef` |
 | Functions / classes | `#a6e22e` |
 
+## Tests
+
+A headless test suite checks the palette wiring, the config hooks
+(`transparent`, `styles`, `on_colors`, `on_highlights`), terminal colors, the
+`:colorscheme` entry path, and the lualine theme:
+
+```sh
+make test
+# or: nvim --headless -l tests/run.lua
+```
+
 ## Credits
 
 - Original VSCode theme: [74th/vscode-monokaicharcoal](https://github.com/74th/vscode-monokaicharcoal)
