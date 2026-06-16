@@ -1,5 +1,9 @@
 # monokai-charcoal.nvim
 
+![Neovim](https://img.shields.io/badge/Neovim-0.8+-43b9d8?style=flat-square&logo=neovim&logoColor=white)
+![Lua](https://img.shields.io/badge/Made%20with-Lua-ae81ff?style=flat-square&logo=lua&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-a6e22e?style=flat-square)
+
 A Neovim port of the [Monokai Charcoal (high contrast)](https://github.com/74th/vscode-monokaicharcoal)
 VSCode theme: classic Monokai syntax over a true-black background with a cyan
 "charcoal" frame. Written in Lua, with Treesitter, LSP semantic tokens,
@@ -8,6 +12,25 @@ diagnostics, terminal colors, and the common plugin ecosystem covered.
 The palette is lifted 1:1 from the original VSCode theme, including its signature
 choices: **orange comments**, pink keywords, green functions, cyan types, purple
 constants, and yellow strings.
+
+## Features
+
+- True-black, high-contrast background with the original cyan frame accent
+- Full Treesitter support, including the Neovim 0.10+ `@markup.*` captures
+- LSP semantic token highlighting (`@lsp.type.*` / `@lsp.typemod.*`)
+- Diagnostics: virtual text, underlines, and signs
+- 16 terminal colors mapped from the original theme's ANSI palette
+- Matching `lualine` theme bundled in
+- `transparent` and `dim_inactive` toggles
+- Per-group style overrides plus `on_colors` / `on_highlights` escape hatches
+- Pure Lua, no dependencies, lazy-load friendly
+
+## Supported plugins
+
+Treesitter, native LSP, gitsigns, telescope, nvim-cmp, blink.cmp, nvim-tree,
+neo-tree, bufferline, indent-blankline (v3), which-key, nvim-notify, nvim-dap /
+dap-ui, mini.nvim, and rainbow-delimiters. Anything not listed inherits sensible
+colors from the core syntax and editor groups.
 
 ## Requirements
 
